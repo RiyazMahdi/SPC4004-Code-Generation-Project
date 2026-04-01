@@ -5,26 +5,32 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 
-# Load the UCI Heart Disease dataset
+# -------------------------
+# Load dataset
+# -------------------------
 data = pd.read_csv("heart-disease.csv")
 
-#Check the structure of the dataset
+# Inspect dataset
 print(df.head())
 print(df.info())
-
-#Check for missing values
 print(df.isnull().sum())
 
-# Split into features and target
+# -------------------------
+# Features and target
+# -------------------------
 X = data.drop("target", axis=1)
 y = data["target"]
 
-# Split data into training and testing sets
+# -------------------------
+# Train-test split
+# -------------------------
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
 
-# Standardize the feature values
+# -------------------------
+# Scaling for logistic regression
+# -------------------------
 scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
@@ -34,7 +40,9 @@ scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
-# Logistic Regression model
+# -------------------------
+# Logistic Regression
+# -------------------------
 log_model = LogisticRegression(max_iter=1000)
 log_model.fit(X_train_scaled, y_train)
 y_pred_log = log_model.predict(X_test_scaled)
@@ -45,7 +53,9 @@ print(confusion_matrix(y_test, y_pred_log))
 print("Classification Report (Logistic Regression):")
 print(classification_report(y_test, y_pred_log))
 
-# Random Forest model
+# -------------------------
+# Random Forest
+# -------------------------
 rf_model = RandomForestClassifier(random_state=42)
 rf_model.fit(X_train, y_train)
 y_pred_rf = rf_model.predict(X_test)
@@ -54,7 +64,9 @@ print("Random Forest Accuracy:", accuracy_score(y_test, y_pred_rf))
 print("Confusion Matrix (Random Forest):")
 print(confusion_matrix(y_test, y_pred_rf))
 
-# Hyperparameter tuning for Random Forest
+# -------------------------
+# Tuned Random Forest with hyperparameters
+# -------------------------
 param_grid = {
     "n_estimators": [50, 100, 200],
     "max_depth": [None, 5, 10]
