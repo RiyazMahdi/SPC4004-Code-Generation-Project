@@ -7,6 +7,13 @@ from sklearn.metrics import accuracy_score, confusion_matrix
 # Load the UCI Heart Disease dataset
 data = pd.read_csv("heart-disease.csv")
 
+#Check the structure of the dataset
+print(df.head())
+print(df.info())
+
+#Check for missing values
+print(df.isnull().sum())
+
 # Split into features and target
 X = data.drop("target", axis=1)
 y = data["target"]
