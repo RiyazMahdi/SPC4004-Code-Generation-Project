@@ -104,7 +104,10 @@ Particular attention was given to **recall**, as false negatives (missed heart d
 
 ---
 
+
+
 ## Repository Structure
+```
 ├── code/
 │ ├── final_model.py
 │ ├── heart_disease_model.py
@@ -115,6 +118,7 @@ Particular attention was given to **recall**, as false negatives (missed heart d
 │
 ├── README.md
 └── requirements.txt
+```
 
 
 ---
