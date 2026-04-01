@@ -2,6 +2,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 
 # Load the UCI Heart Disease dataset
@@ -28,22 +29,28 @@ scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
-# Train logistic regression model
-model = LogisticRegression(max_iter=1000)
-model.fit(X_train_scaled, y_train)
+# Scale the features for logistic regression
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
 
-# Predict on test data
-y_pred = model.predict(X_test_scaled)
+# Logistic Regression model
+log_model = LogisticRegression(max_iter=1000)
+log_model.fit(X_train_scaled, y_train)
+y_pred_log = log_model.predict(X_test_scaled)
 
-# Evaluate the model
-accuracy = accuracy_score(y_test, y_pred)
-conf_matrix = confusion_matrix(y_test, y_pred)
-report = classification_report(y_test, y_pred)
+print("Logistic Regression Accuracy:", accuracy_score(y_test, y_pred_log))
+print("Confusion Matrix (Logistic Regression):")
+print(confusion_matrix(y_test, y_pred_log))
+print("Classification Report (Logistic Regression):")
+print(classification_report(y_test, y_pred_log))
 
-print(f"Accuracy: {accuracy:.2f}")
-print("Confusion Matrix:")
-print(conf_matrix)
-print("Classification Report:")
-print(report)
+# Random Forest model
+rf_model = RandomForestClassifier(random_state=42)
+rf_model.fit(X_train, y_train)
+y_pred_rf = rf_model.predict(X_test)
 
+print("Random Forest Accuracy:", accuracy_score(y_test, y_pred_rf))
+print("Confusion Matrix (Random Forest):")
+print(confusion_matrix(y_test, y_pred_rf))
 
