@@ -55,11 +55,14 @@ Key stages included:
 ---
 
 ## Results
-| Model                     | Accuracy |
-|--------------------------|---------|
-| Logistic Regression      | 0.85    |
-| Random Forest            | 0.84    |
-| Tuned Random Forest      | 0.87    |
+
+| Model | Test Accuracy | CV Accuracy | Recall (Disease) | Precision (Disease) | F1 (Disease) |
+|---|---|---|---|---|---|
+| Logistic Regression | 0.80 | 0.814 ± 0.101 | 0.91 | 0.77 | 0.83 |
+| Random Forest (default) | 0.84 | 0.802 ± 0.070 | — | — | — |
+| Tuned Random Forest | 0.82 | 0.835 | 0.97 | 0.76 | 0.85 |
+
+Best parameters identified by GridSearchCV: `n_estimators: 200`, `max_depth: None`
 
 ### Key Observations
 - Logistic regression provided a strong baseline performance  
@@ -100,8 +103,9 @@ Particular attention was given to **recall**, as false negatives (missed heart d
 ## Technologies Used
 - Python  
 - pandas  
-- scikit-learn  
-
+- scikit-learn
+- matplotlib
+- seaborn
 ---
 
 
@@ -132,7 +136,7 @@ Particular attention was given to **recall**, as false negatives (missed heart d
 
 ---
 
-## 📌 Conclusion
+##  Conclusion
 This project highlights the importance of critically evaluating AI-generated code. While AI tools can quickly produce functional solutions, they require careful review, improvement, and validation to ensure reliability and effectiveness.
 
 The final model demonstrates improved performance through iterative refinement, reinforcing the role of human oversight in machine learning workflows.
