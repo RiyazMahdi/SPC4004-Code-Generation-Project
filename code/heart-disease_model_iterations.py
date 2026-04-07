@@ -150,3 +150,15 @@ plt.tight_layout()
 plt.savefig("confusion_matrices.png", dpi=150)
 plt.show()
 print("Confusion matrix saved as confusion_matrices.png")
+importance_df = pd.DataFrame({
+    'Feature': features,
+    'Importance': feature_importances
+}).sort_values(by='Importance', ascending=False)
+
+plt.figure()
+plt.barh(importance_df['Feature'], importance_df['Importance'])
+plt.xlabel("Importance")
+plt.ylabel("Feature")
+plt.title("Random Forest Feature Importance")
+plt.gca().invert_yaxis()
+plt.show()
